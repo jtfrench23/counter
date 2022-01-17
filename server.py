@@ -8,10 +8,11 @@ def index():
     return render_template("index.html")
 @app.route('/count', methods=['POST'])
 def count():
-    if 'increaseCount' in session:
-        print('key exists!')
-    else:
-        print("key 'increaseCount' does NOT exist")
-
+    session['count']+=1
+    return redirect('/')
+@app.route('/reset', methods=['POST'])
+def reset():
+    session['count']=0
+    return redirect('/')
 if __name__=="__main__":   
     app.run(debug=True)    
